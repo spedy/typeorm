@@ -2,6 +2,8 @@ import * as path from "../../vendor/https/deno.land/std/path/mod.ts";
 import * as colors from "../../vendor/https/deno.land/std/fmt/colors.ts";
 import * as fs from "../../vendor/https/deno.land/std/fs/mod.ts";
 import {NotImplementedError} from "../error/NotImplementedError.ts";
+import * as pg from "https://deno.land/x/postgres/mod.ts";
+
 type Buffer = unknown;
 export type ReadStream = unknown;
 
@@ -51,6 +53,8 @@ export class PlatformTools {
         // if name is not absolute or relative, then try to load package from the node_modules of the directory we are currently in
         // this is useful when we are using typeorm package globally installed and it accesses drivers
         // that are not installed globally
+        console.log(pg);
+        return pg;
 
         throw new NotImplementedError('PlatformTools.load');
     }
