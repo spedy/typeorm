@@ -3,11 +3,15 @@
     {
       "protocol": "https",
       "path": "deno.land/std",
-      "version": "0.53.0",
+      "version": "v0.62.0",
       "files": [
         "/async/deferred.ts",
+        "/encoding/utf8.ts",
         "/fmt/colors.ts",
-        "/fs/mod.ts",
+        "/fs/empty_dir.ts",
+        "/fs/ensure_dir.ts",
+        "/fs/exists.ts",
+        "/fs/expand_glob.ts",
         "/node/process.ts",
         "/path/mod.ts"
       ]
@@ -15,7 +19,7 @@
     {
       "protocol": "https",
       "path": "deno.land/x/mysql",
-      "version": "2.1.0",
+      "version": "v2.3.0",
       "files": [
         "/mod.ts"
       ]
@@ -23,7 +27,7 @@
     {
       "protocol": "https",
       "path": "deno.land/x/postgres",
-      "version": "v0.4.1",
+      "version": "28249fbec10f7f1581f405a5a5b4b105a838629b",
       "files": [
         "/mod.ts"
       ]
@@ -39,7 +43,7 @@
     {
       "protocol": "https",
       "path": "deno.land/x/sqlite",
-      "version": "v2.1.0",
+      "version": "v2.2.1",
       "files": [
         "/mod.ts"
       ]

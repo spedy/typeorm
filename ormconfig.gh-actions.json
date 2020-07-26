@@ -3,7 +3,7 @@
     "skip": false,
     "name": "sqlite",
     "type": "sqlite",
-    "database": ":memory:",
+    "database": "temp/sqlite.db",
     "logging": false
   },
   {
@@ -18,7 +18,7 @@
     "logging": false
   },
   {
-    "skip": true,
+    "skip": false,
     "name": "mysql",
     "type": "mysql",
     "host": "127.0.0.1",

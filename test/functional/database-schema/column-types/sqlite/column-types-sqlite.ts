@@ -1,20 +1,18 @@
-import {join as joinPaths} from "../../../../../vendor/https/deno.land/std/path/mod.ts";
 import {runIfMain} from "../../../../deps/mocha.ts";
 import "../../../../deps/chai.ts";
 import {Post} from "./entity/Post.ts";
 import {Connection} from "../../../../../src/connection/Connection.ts";
-import {getDirnameOfCurrentModule, closeTestingConnections, createTestingConnections, reloadTestingDatabases} from "../../../../utils/test-utils.ts";
+import {closeTestingConnections, createTestingConnections, reloadTestingDatabases} from "../../../../utils/test-utils.ts";
 import {PostWithoutTypes} from "./entity/PostWithoutTypes.ts";
 import {FruitEnum} from "./enum/FruitEnum.ts";
 
 describe("database schema > column types > sqlite", () => {
 
     let connections: Connection[];
-    const __dirname = getDirnameOfCurrentModule(import.meta);
     const encoder = new TextEncoder();
     before(async () => {
         connections = await createTestingConnections({
-            entities: [joinPaths(__dirname, "/entity/*.ts")],
+            entities: [Post, PostWithoutTypes],
             enabledDrivers: ["sqlite"],
         });
     });
@@ -34,20 +32,19 @@ describe("database schema > column types > sqlite", () => {
         post.integer = 2147483647;
         post.int = 2147483647;
         post.int2 = 32767;
-        post.int8 = 8223372036854775807;
+        post.int8 = 8223372036854775807n; // Unlike node-sqlite, deno-sqlite uses BigInt for large numbers.
         post.tinyint = 127;
         post.smallint = 32767;
         post.mediumint = 8388607;
-        post.bigint = 8223372036854775807;
-        post.unsignedBigInt = 8223372036854775807;
+        post.bigint = 8223372036854775807n; // Unlike node-sqlite, deno-sqlite uses BigInt for large numbers.
+        post.unsignedBigInt = 8223372036854775807n; // Unlike node-sqlite, deno-sqlite uses BigInt for large numbers.
         post.character = "A";
         post.varchar = "This is varchar";
         post.varyingCharacter = "This is varying character";
         post.nchar = "This is nchar";
         post.nativeCharacter = "This is native character";
         post.nvarchar = "This is nvarchar";
-        // TODO(uki00a) not fully tested yet.
-        post.blob = encoder.encode("This is blob");/* new Buffer("This is blob"); */
+        post.blob = encoder.encode("This is blob");
         post.clob = "This is clob";
         post.text = "This is text";
         post.real = 10.5;
